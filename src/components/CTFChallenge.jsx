@@ -13,6 +13,7 @@ const CTFChallenge = () => {
           flag={challenge.flag}
           index={index}
           point={challenge.point}
+          img={challenge.img}
         />
       ))}
     </div>

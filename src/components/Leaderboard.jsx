@@ -37,7 +37,7 @@ const Leaderboard = () => {
     <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4">
       <h2 className="text-3xl font-semibold mb-6">Leaderboard</h2>
       <table className="table-auto w-full max-w-4xl bg-white shadow-md rounded-lg overflow-hidden">
-        <thead className="bg-gray-800 text-white">
+        <thead className="bg-purple-800 text-white">
           <tr>
             <th className="py-3 px-4 text-left">Rank</th>
             <th className="py-3 px-4 text-left">Email</th>

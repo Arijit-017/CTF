@@ -44,15 +44,6 @@ const SignUp = () => {
       <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
 
       <input
-        type="text"
-        placeholder="Name..."
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-      />
-
-      <input
         type="email"
         placeholder="Email..."
         value={email}

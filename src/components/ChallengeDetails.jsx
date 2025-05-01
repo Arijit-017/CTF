@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { db, auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-import { ref, get, set } from 'firebase/database';
-import challenges from '../data/challenges'; // your array of challenge objects
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { db, auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { ref, get, set } from "firebase/database";
+import challenges from "../data/challenges"; // your array of challenge objects
 
 const sanitizeEmail = (email) => {
-  return email.replace(/\./g, '_dot_').replace(/@/g, '_at_');
+  return email.replace(/\./g, "_dot_").replace(/@/g, "_at_");
 };
 
 const ChallengeDetails = () => {
@@ -16,13 +16,13 @@ const ChallengeDetails = () => {
   const challenge = challenges[parseInt(id)];
 
   const [user, setUser] = useState(null);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [feedback, setFeedback] = useState('');
+  const [userAnswer, setUserAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
 
   useEffect(() => {
     if (!challenge) {
-      navigate('/');
+      navigate("/");
     }
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -48,7 +48,7 @@ const ChallengeDetails = () => {
     e.preventDefault();
 
     if (!user) {
-      setFeedback('❗ Please sign in to submit answers.');
+      setFeedback("❗ Please sign in to submit answers.");
       return;
     }
 
@@ -60,10 +60,10 @@ const ChallengeDetails = () => {
       setScore(newScore);
       setFeedback(`✅ Correct! +${challenge.point} Points`);
     } else {
-      setFeedback('❌ Incorrect. Try again!');
+      setFeedback("❌ Incorrect. Try again!");
     }
 
-    setUserAnswer('');
+    setUserAnswer("");
   };
 
   if (!challenge) {
@@ -77,13 +77,48 @@ const ChallengeDetails = () => {
 
   return (
     <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg mt-6">
-      <h2 className="text-2xl font-bold text-purple-700 mb-2">{challenge.title}</h2>
-      <p className="text-gray-800 mb-4 whitespace-pre-line">{challenge.description}</p>
+      <h2 className="text-2xl font-bold text-purple-700 mb-2">
+        {challenge.title}
+      </h2>
+      <p className="text-gray-800 mb-4 whitespace-pre-line break-words">
+        {challenge.description}
+      </p>
+
+      {challenge.img && (
+        <button
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = challenge.img;
+            link.download = `${challenge.title}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+        >
+          Download Image
+        </button>
+      )}
+
+      {challenge.file && (
+        <button
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = challenge.file;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+        >
+          Download File
+        </button>
+      )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
         <input
           type="text"
-          placeholder="Enter the flag like CTFlearn{...}"
+          placeholder="Enter the flag like ISTEHITSC{flag...}"
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
           className="border border-gray-300 rounded px-4 py-2"
@@ -91,7 +126,7 @@ const ChallengeDetails = () => {
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
         >
           Submit
         </button>
