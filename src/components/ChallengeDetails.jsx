@@ -3,27 +3,31 @@ import { useParams, useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { ref, get, set } from "firebase/database";
-import challenges from "../data/challenges"; // your array of challenge objects
+import challenges from "../data/challenges";
 
 const sanitizeEmail = (email) => {
   return email.replace(/\./g, "_dot_").replace(/@/g, "_at_");
 };
 
 const ChallengeDetails = () => {
-  const { id } = useParams(); // This should match the index in the challenges array
+  const { id } = useParams();
   const navigate = useNavigate();
-
   const challenge = challenges[parseInt(id)];
 
   const [user, setUser] = useState(null);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
+  const [isAlreadyCompleted, setIsAlreadyCompleted] = useState(false);
 
   useEffect(() => {
     if (!challenge) {
       navigate("/");
     }
+
+    // Check localStorage for completed challenges
+    const completedChallenges = JSON.parse(localStorage.getItem("completedChallenges") || "[]");
+    setIsAlreadyCompleted(completedChallenges.includes(parseInt(id)));
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
@@ -42,7 +46,7 @@ const ChallengeDetails = () => {
     });
 
     return () => unsubscribe();
-  }, [challenge, navigate]);
+  }, [challenge, navigate, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +56,24 @@ const ChallengeDetails = () => {
       return;
     }
 
+    if (isAlreadyCompleted) {
+      setFeedback("❗ You've already completed this challenge!");
+      return;
+    }
+
     if (userAnswer.trim() === challenge.flag.trim()) {
       const newScore = score + challenge.point;
       const emailKey = sanitizeEmail(user.email);
       const scoreRef = ref(db, `scores/${emailKey}`);
       await set(scoreRef, newScore);
+      
+      // Update completed challenges in localStorage
+      const currentCompleted = JSON.parse(localStorage.getItem("completedChallenges") || "[]");
+      const updatedCompleted = [...currentCompleted, parseInt(id)];
+      localStorage.setItem("completedChallenges", JSON.stringify(updatedCompleted));
+
       setScore(newScore);
+      setIsAlreadyCompleted(true);
       setFeedback(`✅ Correct! +${challenge.point} Points`);
     } else {
       setFeedback("❌ Incorrect. Try again!");
@@ -79,6 +95,11 @@ const ChallengeDetails = () => {
     <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg mt-6">
       <h2 className="text-2xl font-bold text-purple-700 mb-2">
         {challenge.title}
+        {isAlreadyCompleted && (
+          <span className="ml-2 text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+            Completed
+          </span>
+        )}
       </h2>
       <p className="text-gray-800 mb-4 whitespace-pre-line break-words">
         {challenge.description}
@@ -115,22 +136,28 @@ const ChallengeDetails = () => {
         </button>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
-        <input
-          type="text"
-          placeholder="Enter the flag like ISTEHITSC{flag...}"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          className="border border-gray-300 rounded px-4 py-2"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-        >
-          Submit
-        </button>
-      </form>
+      {!isAlreadyCompleted ? (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
+          <input
+            type="text"
+            placeholder="Enter the flag like ISTEHITSC{flag...}"
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            className="border border-gray-300 rounded px-4 py-2"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+          >
+            Submit
+          </button>
+        </form>
+      ) : (
+        <div className="mt-4 p-4 bg-green-50 text-green-800 rounded">
+          You've already solved this challenge!
+        </div>
+      )}
 
       {feedback && <p className="mt-3 font-semibold text-md">{feedback}</p>}
       <p className="mt-1 text-sm text-gray-600">Your Total Score: {score}</p>
