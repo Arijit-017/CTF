@@ -66,19 +66,27 @@ const ChallengeDetails = () => {
       return;
     }
 
-    if (userAnswer.trim() === challenge.flag.trim()) {
+    const normalizedAnswer = userAnswer.trim().toLowerCase();
+    const normalizedFlag = challenge.flag.trim().toLowerCase();
+
+    if (normalizedAnswer === normalizedFlag) {
       const emailKey = sanitizeEmail(user.email);
       const newScore = score + challenge.point;
 
-      // Update score
-      await set(ref(db, `scores/${emailKey}`), newScore);
+      try {
+        // Update score
+        await set(ref(db, `scores/${emailKey}`), newScore);
 
-      // Mark challenge as completed
-      await set(ref(db, `${id}/${emailKey}`), true);
+        // Mark challenge as completed
+        await set(ref(db, `${id}/${emailKey}`), true);
 
-      setScore(newScore);
-      setIsAlreadyCompleted(true);
-      setFeedback(`✅ Correct! +${challenge.point} Points`);
+        setScore(newScore);
+        setIsAlreadyCompleted(true);
+        setFeedback(`✅ Correct! +${challenge.point} Points`);
+      } catch (error) {
+        console.error("Error updating database:", error);
+        setFeedback("⚠️ Something went wrong. Please try again.");
+      }
     } else {
       setFeedback("❌ Incorrect. Try again!");
     }
