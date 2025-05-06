@@ -10,7 +10,6 @@ const sanitizeEmail = (email) => {
 
 function App() {
   const [user, setUser] = useState(null);
-  const [name, setName] = useState('');
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -21,19 +20,6 @@ function App() {
       if (currentUser) {
         setUser(currentUser);
         const emailKey = sanitizeEmail(currentUser.email);
-
-        // Fetch name
-        const userRef = ref(db, `users/${emailKey}`);
-        const userSnap = await get(userRef);
-
-        const userData = userSnap.val();
-        if (userSnap.exists()) {
-          if (typeof userData === 'object' && userData.name) {
-            setName(userData.name);
-          } else if (typeof userData === 'string') {
-            setName(userData);
-          }
-        }
 
         // Fetch score
         const scoreRef = ref(db, `scores/${emailKey}`);

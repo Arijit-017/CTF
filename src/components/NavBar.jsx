@@ -63,12 +63,6 @@ const NavBar = () => {
             {!user && (
               <>
                 <Link
-                  to="/signup"
-                  className="text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-5 py-2 rounded-md font-medium transition-all duration-200 shadow-md hover:shadow-lg"
-                >
-                  Sign Up
-                </Link>
-                <Link
                   to="/signin"
                   className="text-black border-2 border-purple-500 hover:bg-purple-500/10 px-5 py-2 rounded-md font-medium transition-all duration-200"
                 >

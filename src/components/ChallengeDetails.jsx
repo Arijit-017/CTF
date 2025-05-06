@@ -23,21 +23,26 @@ const ChallengeDetails = () => {
   useEffect(() => {
     if (!challenge) {
       navigate("/");
+      return;
     }
-
-    // Check localStorage for completed challenges
-    const completedChallenges = JSON.parse(localStorage.getItem("completedChallenges") || "[]");
-    setIsAlreadyCompleted(completedChallenges.includes(parseInt(id)));
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         const emailKey = sanitizeEmail(currentUser.email);
-        const scoreRef = ref(db, `scores/${emailKey}`);
-        const snapshot = await get(scoreRef);
 
-        if (snapshot.exists()) {
-          setScore(snapshot.val());
+        // Check if the challenge is already completed
+        const challengeRef = ref(db, `${id}/${emailKey}`);
+        const challengeSnap = await get(challengeRef);
+        if (challengeSnap.exists() && challengeSnap.val() === true) {
+          setIsAlreadyCompleted(true);
+        }
+
+        // Get or initialize score
+        const scoreRef = ref(db, `scores/${emailKey}`);
+        const scoreSnap = await get(scoreRef);
+        if (scoreSnap.exists()) {
+          setScore(scoreSnap.val());
         } else {
           await set(scoreRef, 0);
           setScore(0);
@@ -62,15 +67,14 @@ const ChallengeDetails = () => {
     }
 
     if (userAnswer.trim() === challenge.flag.trim()) {
-      const newScore = score + challenge.point;
       const emailKey = sanitizeEmail(user.email);
-      const scoreRef = ref(db, `scores/${emailKey}`);
-      await set(scoreRef, newScore);
-      
-      // Update completed challenges in localStorage
-      const currentCompleted = JSON.parse(localStorage.getItem("completedChallenges") || "[]");
-      const updatedCompleted = [...currentCompleted, parseInt(id)];
-      localStorage.setItem("completedChallenges", JSON.stringify(updatedCompleted));
+      const newScore = score + challenge.point;
+
+      // Update score
+      await set(ref(db, `scores/${emailKey}`), newScore);
+
+      // Mark challenge as completed
+      await set(ref(db, `${id}/${emailKey}`), true);
 
       setScore(newScore);
       setIsAlreadyCompleted(true);
