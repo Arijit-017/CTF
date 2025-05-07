@@ -43,7 +43,7 @@ What’s the name of this powerful tool?
 
 What am I?`,
     flag: "ISTEHITSC{h1dd3nM3tadata}",
-    img: "/assets/InTheMetadata/hacker.jpg",
+    img: "/assets/BehindTheJPG/inTheMetaData.jpg",
     point: 10,
   },
   {
@@ -59,7 +59,7 @@ Feed it right, it’ll guide you through."
 Hash :- $6$saltstring$T5Pvevzodw2yOMrxNC1VW2A2CkVUovvfCgmix9t.oPmrAFwOaX1dIyDo3AWgEXnKKludzNtDirvW9vxQhmomC0
 `,
     flag: "ISTEHITSC{h4ck3r_C0d3}",
-    file: "/assets/InsideTheFolder/unlockIt.zip",
+    file: "/assets/BehindTheJPG/unlockIt.zip",
     point: 80,
   },
   {
@@ -89,7 +89,7 @@ Though I look the same to every eye, I whisper in strings if you pry.
 Find my truth not at the start or end —
 But buried where the bytes descend.`,
     flag: "ISTEHITSC{d3c0d3r_5h1ft}",
-    img: "/assets/CoreOfTheImage/weAreWatching.jpg",
+    img: "/assets/BehindTheJPG/weAreWatching.jpg",
     point: 10,
   },
   {
@@ -110,7 +110,7 @@ And hidden within, the flag will reside.
 
 Link: https://day2-front.vercel.app/`,
     flag: "ISTEHITSC{Brut3F0rc3_Succ3ss}",
-    txtfile: "/assets/TheSilentSentinal/wordlist.txt",
+    txtfile: "/assets/BehindTheJPG/wordlist.txt",
     point: 30,
   },
 ];
