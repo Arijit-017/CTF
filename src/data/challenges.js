@@ -9,7 +9,7 @@ Where secrets in the pixels ride.
 My keeper's name will break the lock —
 Just whisper mayank, and you’ll unlock the talk.
 
-Hint - Use Steghide Tool`,
+Hint - Use steghide tool`,
     flag: "ISTEHITSC{sT3g0_L5b}",
     img: "/assets/BehindTheJPG/hii.jpg",
     point: 50,
@@ -43,7 +43,7 @@ What’s the name of this powerful tool?
 
 What am I?`,
     flag: "ISTEHITSC{h1dd3nM3tadata}",
-    img: "/assets/BehindTheJPG/inTheMetaData.jpg",
+    img: "/assets/InTheMetadata/hacker.jpg",
     point: 10,
   },
   {
@@ -89,6 +89,26 @@ But buried where the bytes descend.`,
     flag: "ISTEHITSC{d3c0d3r_5h1ft}",
     img: "/assets/CoreOfTheImage/weAreWatching.jpg",
     point: 10,
+  },
+  {
+    id: 7,
+    title: "The Silent Sentinel",
+    description: `Before you lies a guarded gate,
+A name well-known will seal your fate.
+“KunalRajnish” walks in with pride,
+But his secret stays well locked inside.
+
+You hold the words, a sacred scroll,
+One among them can make you whole.
+No strength or sword, no magic art—
+Just patient minds and a hacker’s heart.
+
+When guess meets truth, the doors swing wide,
+And hidden within, the flag will reside.
+
+Link: https://day2-front.vercel.app/`,
+    flag: "ISTEHITSC{Brut3F0rc3_Succ3ss}",
+    point: 30,
   },
 ];
 
