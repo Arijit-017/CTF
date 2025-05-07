@@ -7,7 +7,9 @@ But inside I hold a hidden thrill.
 Use a tool that sneaks and hides,
 Where secrets in the pixels ride.
 My keeper's name will break the lock —
-Just whisper mayank, and you’ll unlock the talk.`,
+Just whisper mayank, and you’ll unlock the talk.
+
+Hint - Use Steghide Tool`,
     flag: "ISTEHITSC{sT3g0_L5b}",
     img: "/assets/BehindTheJPG/hii.jpg",
     point: 50,
