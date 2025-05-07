@@ -1,21 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import HomePage from "./components/HomePage";
 import SignIn from "./components/SignIn";
 import Leaderboard from "./components/Leaderboard";
 import NavBar from "./components/NavBar";
-import CTFChallenge from './components/CTFChallenge';
+import CTFChallenge from "./components/CTFChallenge";
 import ChallengeDetails from "./components/ChallengeDetails";
 
 const App = () => {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-100">
+      <div className="min-h-screen flex flex-col bg-gray-900 text-gray-300">
         <NavBar />
-        <main className="flex-grow p-4">
+        <main className="flex-grow p-6">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signin" element={<SignIn />} />

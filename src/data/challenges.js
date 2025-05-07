@@ -74,7 +74,9 @@ Until you find the hidden run.
 Peek inside the lines once there —
 A whispered secret hides somewhere.
 
-Link: https://insightblog.onrender.com/`,
+Link: https://insightblog.onrender.com/
+
+Wait to load the Page.........`,
     flag: "ISTEHITSC{b3nch_M4rk3r}",
     point: 40,
   },

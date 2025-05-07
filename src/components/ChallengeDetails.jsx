@@ -104,76 +104,76 @@ const ChallengeDetails = () => {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-lg mt-6">
-      <h2 className="text-2xl font-bold text-purple-700 mb-2">
-        {challenge.title}
-        {isAlreadyCompleted && (
-          <span className="ml-2 text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
-            Completed
-          </span>
-        )}
-      </h2>
-      <p className="text-gray-800 mb-4 whitespace-pre-line break-words">
-        {challenge.description}
-      </p>
+    <div className="p-6 max-w-3xl mx-auto bg-gray-800 shadow-md rounded-lg mt-6 text-gray-300 border border-gray-700">
+  <h2 className="text-2xl font-bold text-purple-400 mb-2 flex items-center">
+    {challenge.title}
+    {isAlreadyCompleted && (
+      <span className="ml-2 text-sm bg-green-800 text-green-200 px-2 py-1 rounded">
+        Completed
+      </span>
+    )}
+  </h2>
+  <p className="text-gray-400 mb-4 whitespace-pre-line break-words">
+    {challenge.description}
+  </p>
 
-      {challenge.img && (
-        <button
-          onClick={() => {
-            const link = document.createElement("a");
-            link.href = challenge.img;
-            link.download = `${challenge.title}`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }}
-          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-        >
-          Download Image
-        </button>
-      )}
+  {challenge.img && (
+    <button
+      onClick={() => {
+        const link = document.createElement("a");
+        link.href = challenge.img;
+        link.download = `${challenge.title}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }}
+      className="px-4 py-2 rounded bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-sm"
+    >
+      Download Image
+    </button>
+  )}
 
-      {challenge.file && (
-        <button
-          onClick={() => {
-            const link = document.createElement("a");
-            link.href = challenge.file;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }}
-          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-        >
-          Download File
-        </button>
-      )}
+  {challenge.file && (
+    <button
+      onClick={() => {
+        const link = document.createElement("a");
+        link.href = challenge.file;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }}
+      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded shadow-sm ml-2"
+    >
+      Download File
+    </button>
+  )}
 
-      {!isAlreadyCompleted ? (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
-          <input
-            type="text"
-            placeholder="Enter the flag like ISTEHITSC{flag...}"
-            value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
-            className="border border-gray-300 rounded px-4 py-2"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-          >
-            Submit
-          </button>
-        </form>
-      ) : (
-        <div className="mt-4 p-4 bg-green-50 text-green-800 rounded">
-          You've already solved this challenge!
-        </div>
-      )}
-
-      {feedback && <p className="mt-3 font-semibold text-md">{feedback}</p>}
-      <p className="mt-1 text-sm text-gray-600">Your Total Score: {score}</p>
+  {!isAlreadyCompleted ? (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
+      <input
+        type="text"
+        placeholder="Enter the flag like ISTEHITSC{flag...}"
+        value={userAnswer}
+        onChange={(e) => setUserAnswer(e.target.value)}
+        className="border border-gray-600 rounded px-4 py-2 bg-gray-700 text-gray-300 focus:ring-purple-500 focus:border-purple-500"
+        required
+      />
+      <button
+        type="submit"
+        className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded  shadow-md"
+      >
+        Submit
+      </button>
+    </form>
+  ) : (
+    <div className="mt-4 p-4 bg-green-900 text-green-300 rounded shadow-sm">
+      You've already solved this challenge!
     </div>
+  )}
+
+  {feedback && <p className="mt-3 font-semibold text-md text-yellow-400">{feedback}</p>}
+  <p className="mt-1 text-sm text-gray-500">Your Total Score: {score}</p>
+</div>
   );
 };
 

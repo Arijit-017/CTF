@@ -34,27 +34,41 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4">
-      <h2 className="text-3xl font-semibold mb-6">Leaderboard</h2>
-      <table className="table-auto w-full max-w-4xl bg-white shadow-md rounded-lg overflow-hidden">
-        <thead className="bg-purple-800 text-white">
-          <tr>
-            <th className="py-3 px-4 text-left">Rank</th>
-            <th className="py-3 px-4 text-left">Email</th>
-            <th className="py-3 px-4 text-left">Score</th>
+    <div className="min-h-screen flex flex-col items-center bg-gray-900 p-6">
+  <h2 className="text-3xl font-semibold text-white mb-8">Leaderboard</h2>
+  <div className="w-full max-w-4xl bg-gray-800 shadow-lg rounded-xl overflow-hidden border border-gray-700">
+    <table className="table-auto w-full">
+      <thead className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+        <tr>
+          <th className="py-4 px-6 text-left font-semibold">Rank</th>
+          <th className="py-4 px-6 text-left font-semibold">Email</th>
+          <th className="py-4 px-6 text-left font-semibold">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {leaders.map((user, index) => (
+          <tr
+            key={user.email}
+            className={`border-t border-gray-700 hover:bg-gray-700 ${
+              index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-900'
+            }`}
+          >
+            <td className="py-4 px-6 text-white">{index + 1}</td>
+            <td className="py-4 px-6 text-gray-300">{user.email}</td>
+            <td className="py-4 px-6 text-yellow-400">{user.score}</td>
           </tr>
-        </thead>
-        <tbody>
-          {leaders.map((user, index) => (
-            <tr key={user.email} className="border-t border-gray-300 hover:bg-gray-50">
-              <td className="py-3 px-4">{index + 1}</td>
-              <td className="py-3 px-4">{user.email}</td>
-              <td className="py-3 px-4">{user.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+        {leaders.length === 0 && (
+          <tr>
+            <td className="py-4 px-6 text-center text-gray-500" colSpan="3">
+              No leaders to display yet.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
   );
 };
 
