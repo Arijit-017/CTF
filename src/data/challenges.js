@@ -41,7 +41,7 @@ What’s the name of this powerful tool?
 
 What am I?`,
     flag: "ISTEHITSC{h1dd3nM3tadata}",
-    img: "/assets/InTheMetadata/inTheMetaData.jpg",
+    img: "/assets/BehindTheJPG/inTheMetaData.jpg",
     point: 10,
   },
   {
