@@ -108,7 +108,9 @@ Just patient minds and a hacker’s heart.
 When guess meets truth, the doors swing wide,
 And hidden within, the flag will reside.
 
-Link: https://day2-front.vercel.app/`,
+Link: https://day2-front.vercel.app/
+
+Download File from Drive: https://drive.google.com/file/d/1xFLAb-BQ1l5h_ZbOyknkubpCrX0kuELM/view?usp=sharing`,
     flag: "ISTEHITSC{Brut3F0rc3_Succ3ss}",
     txtfile: "/assets/BehindTheJPG/wordlist.txt",
     point: 30,
