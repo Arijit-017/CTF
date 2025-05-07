@@ -34,21 +34,21 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-900 p-4 sm:p-6">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-6 sm:mb-8">
+    <div className="min-h-screen flex flex-col items-center bg-gray-900 p-3 sm:p-6">
+      <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-4 sm:mb-8">
         Leaderboard
       </h2>
-      <div className="w-full max-w-4xl bg-gray-800 shadow-lg rounded-xl overflow-x-auto border border-gray-700">
+      <div className="w-full max-w-4xl bg-gray-800 shadow-lg rounded-md sm:rounded-xl overflow-x-auto border border-gray-700">
         <table className="table-auto w-full min-w-[600px]">
           <thead className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
             <tr>
-              <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold">
+              <th className="py-2 px-3 sm:py-4 sm:px-6 text-left font-semibold">
                 Rank
               </th>
-              <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold">
+              <th className="py-2 px-3 sm:py-4 sm:px-6 text-left font-semibold">
                 Email
               </th>
-              <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold">
+              <th className="py-2 px-3 sm:py-4 sm:px-6 text-left font-semibold">
                 Score
               </th>
             </tr>
@@ -61,13 +61,13 @@ const Leaderboard = () => {
                   index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"
                 }`}
               >
-                <td className="py-3 px-4 sm:py-4 sm:px-6 text-white">
+                <td className="py-2 px-3 sm:py-4 sm:px-6 text-white">
                   {index + 1}
                 </td>
-                <td className="py-3 px-4 sm:py-4 sm:px-6 text-gray-300">
+                <td className="py-2 px-3 sm:py-4 sm:px-6 text-gray-300">
                   {user.email}
                 </td>
-                <td className="py-3 px-4 sm:py-4 sm:px-6 text-yellow-400">
+                <td className="py-2 px-3 sm:py-4 sm:px-6 text-yellow-400">
                   {user.score}
                 </td>
               </tr>
