@@ -1,10 +1,37 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { ref, get } from "firebase/database";
+
+const sanitizeEmail = (email) =>
+  email.replace(/\./g, "_dot_").replace(/@/g, "_at_");
 
 const Card = ({ title, index, point }) => {
   const navigate = useNavigate();
+  const [solved, setSolved] = useState(false);
+  const [userEmailKey, setUserEmailKey] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const emailKey = sanitizeEmail(user.email);
+        setUserEmailKey(emailKey);
+        const challengeRef = ref(db, `${index}/${emailKey}`);
+        const snapshot = await get(challengeRef);
+        if (snapshot.exists() && snapshot.val() === true) {
+          setSolved(true);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [index]);
 
   const handleSolveClick = () => {
-    navigate(`/challenge/${index}`);
+    if (!solved) {
+      navigate(`/challenge/${index}`);
+    }
   };
 
   return (
@@ -18,9 +45,14 @@ const Card = ({ title, index, point }) => {
 
       <button
         onClick={handleSolveClick}
-        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded font-medium transition duration-300"
+        disabled={solved}
+        className={`w-full py-2 rounded font-medium transition duration-300 ${
+          solved
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-purple-600 hover:bg-purple-700 text-white"
+        }`}
       >
-        Solve
+        {solved ? "Solved ✅" : "Solve"}
       </button>
     </div>
   );

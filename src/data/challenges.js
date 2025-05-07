@@ -41,7 +41,7 @@ What’s the name of this powerful tool?
 
 What am I?`,
     flag: "ISTEHITSC{h1dd3nM3tadata}",
-    img: "/assets/InTheMetadata/hacker.jpg",
+    img: "https://res.cloudinary.com/dds4wowea/image/upload/v1746602684/hacker_xk5bcd.jpg",
     point: 10,
   },
   {
