@@ -108,6 +108,7 @@ And hidden within, the flag will reside.
 
 Link: https://day2-front.vercel.app/`,
     flag: "ISTEHITSC{Brut3F0rc3_Succ3ss}",
+    txtfile: "/assets/TheSilentSentinal/wordlist.txt",
     point: 30,
   },
 ];

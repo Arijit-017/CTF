@@ -148,6 +148,22 @@ const ChallengeDetails = () => {
         </button>
       )}
 
+      {challenge.txtfile && (
+        <button
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = challenge.txtfile;
+            link.download = `wordlist.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+        >
+          Download Text File
+        </button>
+      )}
+
       {!isAlreadyCompleted ? (
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
           <input
