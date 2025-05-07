@@ -388,7 +388,7 @@ function App() {
                 className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors"
               >
                 <Mail className="h-5 w-5 mr-2" />
-                istehitsc@example.com
+                hitiste.studentchapter@gmail.com
               </a>
             </div>
           </div>
